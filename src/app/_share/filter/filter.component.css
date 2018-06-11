@@ -1,0 +1,21 @@
+
+@media(max-width: 1300px){
+  .custom-datetime i.fa.fa-calendar-o{
+    display:none;
+  }
+  .custom-datetime .input-group{
+    display:block
+  }
+  .custom-datetime .input-group span.text{
+    white-space: nowrap;
+    display:block;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .custom-datetime .input-group .caret{
+    position:absolute;
+    top:13px;
+    right:5px;
+  }
+}

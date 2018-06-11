@@ -1,0 +1,144 @@
+<div class="clearfix"></div>
+<div class="page-title">
+  <div class="title_left">
+    <h3 style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap">
+      <a (click)="goHome()"><i class="fa fa-home"></i> Home Page <i class="fa fa-angle-right"></i></a>
+
+      <small>Category Question Management</small>
+    </h3>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12 columns">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>List Category Questions</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="man-qs-form-action">
+          <div class="row">
+
+            <div class="man-qs-search col-md-8 col-sm-8 col-xs-12">
+              <form action="">
+                <div class="form-group row">
+                  <div class="col-md-5 col-sm-8 col-xs-7">
+                    <input maxlength="50" type="text" #keywordSearch (keyup.enter)="submitSearch()" class="form-control"
+                           placeholder="Search by category name">
+                  </div>
+                  <div class="col-md-2 col-sm-4 col-xs-5 btnSearch">
+                    <button (click)="submitSearch()" style="width: auto" type="submit" class="btn btn-primary">Search</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="man-qs-action col-md-4 col-sm-4">
+              <!--Delete-->
+              <button class="btn btn-danger" title="Delete Category Question"
+                      [disabled]="this.tableDirectivesComponent.dataCheckBox.length == 0 ? true : false"
+                      (click)="showDeleteCategoryQuestionModal()"><i class="fa fa-trash"></i></button>
+              <!--Update-->
+              <!--button type="button" class="btn btn-primary btn-circle" title="Update Category Question!">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </button>-->
+              <!--create-->
+              <button type="button" class="btn btn-success btn-circle" title="Create Category Question"
+                      (click)="showAddModalCategoryName('Create')"><i class="fa fa-plus"></i>
+              </button>
+
+              <!--refresh-->
+              <button type="button" class="btn btn-primary btn-circle refresh" title="Refresh" (click)="resetTableCategory()">
+                <i class="fa fa-refresh"></i>
+              </button>
+
+              <!--Filter-->
+            </div>
+          </div>
+        </div>
+
+        <app-table-directives [config]="configTable"
+                              (cellClicked)="onCellClick($event)"
+                              (checkBoxChanged)="onCheckBoxSelected($event)"
+                              (currentPage)="getCurrentPage($event)"
+                              (checkBoxChangedAll)="onCheckBoxSelectedAll($event)"
+                              (sort)="onSortTableCategory($event)"
+                              [rows]="dataTableCategory"
+                              [columns]="columnsTableCategory">
+        </app-table-directives>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal add and edit-->
+<div bsModal #modalAddEditCategory="bs-modal" class="modal fade " tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel"
+     aria-hidden="true" [config]="{backdrop: 'static',  keyboard: false}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-center">{{titleModal}}</h4>
+      </div>
+      <div class="modal-body">
+        <form #formAddEditCategory="ngForm" (ngSubmit)="onSubmitModal(formAddEditCategory.value)">
+          <div class="form-group row" hidden="hidden">
+            <label class="col-sm-3 control-label" for="categoryName">Id</label>
+            <div class="col-sm-9 categoryName">
+              <input type="text" class="form-control" name="id" (ngModel)="categoryQuestion.id">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 control-label" for="categoryName">Category name:</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="categoryName" id="categoryName" #inputCategoryName
+                     required
+                     maxlength="50"
+                     [(ngModel)]="categoryQuestion.categoryName" #categoryName="ngModel"
+                     (focus)="eventForcusInputCategoryName()">
+              <p class="show-errors">
+                <small class="text-danger" *ngIf="categoryName.invalid && formAddEditCategory.submited" || categoryName.dirty>
+                  <span *ngIf="categoryName.errors.maxlength">{{categoryName_maxlength}}</span>
+                </small>
+                <small class="text-danger" *ngIf="res_error != null">
+                  {{res_error}}
+                </small>
+              </p>
+            </div>
+          </div>
+          <div class="form-group row action">
+            <div class="col-sm-9 col-sm-offset-3">
+              <p class="text-right action">
+                <button type="submit" class="btn btn-primary" [disabled]="formAddEditCategory.invalid">Save</button>
+                <button type="button" class="btn btn-danger" (click)="onCancelModal('create')">Cancel</button>
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--popup delete category question-->
+<div bsModal #modalDeleteCategoryQuestion="bs-modal" class="modal fade modal-delete-group" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-center" style="text-align: center"
+        >Are you sure want to delete {{this.tableDirectivesComponent.dataCheckBox.length > 1 ?
+          this.tableDirectivesComponent.dataCheckBox.length + ' categories' :
+          this.tableDirectivesComponent.dataCheckBox.length + ' category' }} question?</h4>
+      </div>
+      <div class="modal-footer">
+        <div class="text-right buttonCategoryQuestionPopup">
+            <button class="btn btn-primary btnYesPopup" (click)="onDeleteCategoryQuestion()">Yes</button>
+            <button class="btn btn-danger btnNoPopup" (click)="onCancelModal('delete')">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

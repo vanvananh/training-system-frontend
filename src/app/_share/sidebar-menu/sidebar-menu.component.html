@@ -1,0 +1,18 @@
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+  <div class="menu_section">
+    <ul class="nav side-menu">
+      <li *ngFor="let item of functions" routerLinkActive="current-page"><a (click)="routerLink(item.menuLink)"><i
+        class="fa {{item.iconCss}}"></i> {{item.menuName}} <span *ngIf="item.subMenuCollection.length>0"
+                                                                 class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+          <li *ngFor="let subItem of item.subMenuCollection"><a routerLink="{{subItem.subMenuLink}}"
+                                                                routerLinkActive="active">{{subItem.subMenuName}}</a>
+          </li>
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+
+</div>
+

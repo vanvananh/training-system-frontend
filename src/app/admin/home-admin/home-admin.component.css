@@ -1,0 +1,21 @@
+.man-breadcrumbs li i.fa-home {
+  padding-right: 5px;
+}
+
+.man-breadcrumbs ul {
+  display: flex;
+  list-style: none;
+  padding-left: 1px;
+}
+
+.man-breadcrumbs ul li {
+  padding-right: 10px;
+}
+.x_title {
+  padding-left: unset;
+}
+
+.x_content {
+  padding: unset;
+}
+

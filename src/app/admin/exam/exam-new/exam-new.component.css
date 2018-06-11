@@ -1,0 +1,28 @@
+#btn-control {
+    margin-right: 0px;
+}
+
+#note {
+    resize: none;
+}
+.required .control-label:after {
+    content:"*";color:red;
+    margin-left: 5px;
+}
+.col-md-5{
+    padding-right: 0; 
+    padding-left: 0;
+    width:40%;
+}
+#btn-control[_ngcontent-c4] {
+    margin-right: 0px;
+    margin-top: -9px;
+    margin-bottom: 2px;
+}
+p.show-errors {
+    height: 20px;
+    margin-bottom: 0px;
+    margin-top: -18px;
+    padding-left: 0px;
+    margin-left: -11px;
+  }

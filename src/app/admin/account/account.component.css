@@ -1,0 +1,9 @@
+.form-group > label {
+  padding-left: 0px;
+  padding-right: 0px;
+  text-align: left;
+}
+
+.navbar-right .dropdown-menu {
+  left: 0;
+}

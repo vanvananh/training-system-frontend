@@ -1,0 +1,82 @@
+<div class="clearfix"></div>
+<div class="page-title">
+  <div class="title_left">
+    <h3 style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap">
+      <a (click)="goHome()"><i class="fa fa-home"></i> Home Page <i class="fa fa-angle-right"></i></a>
+      <small>Category Question Detail</small>
+    </h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-md-12 col-xs-12 columns">
+    <div class="x_panel col-md-12">
+      <div class="x_title">
+        <h2 id="CategoryDetail">Category Question Detail</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div align="center" class="col-md-12 col-sm-12 col-xs-12">
+        <div class="showNameUpdate word-wrap">
+          <span class="categoryName"><span style="white-space: pre-wrap">{{categoryQuestionDetailData.categoryName}}</span>
+            <a class="edit-categoryQuestionName " (click)="showUpdateCategoryQuestionNameModal()"
+               title="Update Category Question Name"><i class="fa fa-pencil"></i>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal update CategoryQuestionName -->
+<div bsModal #modalUpdateCategoryQuestionName="bs-modal" class="modal fade " tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel"
+     aria-hidden="true" [config]="{backdrop: 'static',  keyboard: false}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-center">Update Category Question Name</h4>
+      </div>
+      <div class="modal-body">
+        <form #formUpdateCategoryQuestionName="ngForm">
+          <div class="form-group row" hidden="hidden">
+            <label class="col-sm-2 control-label">Id</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="categoryId" [(ngModel)]="categoryQuestionUpdate.categoryId">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-sm-12 control-label">Category Question Name:</label>
+            <div class="col-sm-12 col-md-9">
+              <input type="text" class="form-control" id="categoryName" name="categoryName" #inputCategoryQuestionName
+                     required
+                     maxlength="50"
+                     [ngModel]="categoryQuestionUpdate.categoryName" #categoryName="ngModel" (focus)="eventForcusInputCategoryQuestionName()">
+              <p class="show-errors">
+                <small class="text-danger"
+                       *ngIf="categoryName.invalid && (formUpdateCategoryQuestionName.submited || formUpdateCategoryQuestionName.dirty)">
+                  <!-- <span *ngIf="groupName.errors.required">{{groupName_require}}</span> -->
+                  <span *ngIf="formUpdateCategoryQuestionName.errors.maxlength">{{categoryQuestionName_maxlength}}</span>
+                  <!-- <span *ngIf="groupName.errors.pattern">{{groupName_regex}}</span> -->
+                </small>
+                <small class="text-danger" *ngIf="res_error != null">
+                  {{res_error}}
+                </small>
+              </p>
+            </div>
+          </div>
+          <div class="form-group row action">
+            <div class="col-sm-9 col-xs-9 col-sm-offset-3 col-xs-offset-3">
+              <p class="text-right action">
+                <button type="submit" class="btn btn-primary buttonSave"
+                        [disabled]="formUpdateCategoryQuestionName.invalid || checkValueFormUpdateCategoryQuestionName(categoryName.value)"
+                        (click)="onSubmitFormUpdateCategoryQuestionName(categoryName.value.trim())">Save
+                </button>
+                <button type="button" class="btn btn-danger buttonCancel" (click)="onCancel()">Cancel</button>
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

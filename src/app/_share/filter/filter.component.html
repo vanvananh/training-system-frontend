@@ -1,0 +1,58 @@
+<form class="form-horizontal">
+  <div *ngFor="let column of columns">
+    <div *ngIf="column.filter">
+    </div>
+    <div class="row col-md-4 col-sm-6 col-xs-12 form-group"
+         *ngIf="column.filter&&column.filter.isFilter&&column.filter.isMultilSelect">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12"
+             style="text-align: left;padding-left: unset;padding-right: unset">{{column.title}}: </label>
+      <div class="col-md-9 col-sm-9 col-xs-12" style="padding: unset">
+        <ss-multiselect-dropdown [ngModelOptions]="{standalone: true}" [options]="column.filter.myOptions"
+                                 [texts]="column.filter.myTexts"
+                                 [settings]="column.filter.mySettings"
+                                 [(ngModel)]="column.filter.optionModel"
+                                 (ngModelChange)="onChange($event, column.name.split('.')[0])"></ss-multiselect-dropdown>
+      </div>
+    </div>
+    <div class="row col-md-4 col-sm-6 col-xs-12 form-group"
+         *ngIf="column.filter&&column.filter.isFilter&&column.filter.isDate">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12"
+             style="text-align: left;padding-left: unset;padding-right: unset">{{column.title}}: </label>
+      <div class="col-md-9 col-sm-9 col-xs-12 container-fluid main-container" style="padding: unset">
+        <div class="custom-datetime">
+          <div class="input-group" daterangepicker [options]="picker"
+               (selected)="selectedDateRangePicker($event, column.filter.chosenDate,column.name)"
+               style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc;width: 100%;text-align: center;overflow-x: auto;">
+            <i class="fa fa-calendar-o" style="float: left;padding-top: 3px"></i>
+            <span class="text">{{ column.filter.chosenDate.start | date:'dd/MM/yyyy' }} - {{ column.filter.chosenDate.end| date:'dd/MM/yyyy' }}</span>
+            <b class="caret"></b>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row col-md-4 col-sm-6 col-xs-12 form-group"
+         *ngIf="column.filter&&column.filter.isFilter&&column.filter.isOther">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12"
+             style="text-align: left;padding-left: unset;padding-right: unset">{{column.title}}: </label>
+      <div class="col-md-9 col-sm-9 col-xs-12" style="padding: unset">
+        <div class="col-md-5 col-sm-5 col-xs-5" style="padding: unset">
+          <input #minInput [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="0"
+                 style="border-radius: 3px;"
+                 [(ngModel)]="column.filter.inputMinimum" min="0"
+                 (keydown)="checkNumber($event,minInput.value,column.name)"
+                 (ngModelChange)="onChangeInput(minInput.value,column.name)">
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-2" style="padding: unset;text-align: center;margin-top: 9px">To</div>
+        <div class="col-md-5 col-sm-5 col-xs-5" style="padding: unset">
+          <input #maxInput [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="0"
+                 style="border-radius: 3px;"
+                 [(ngModel)]="column.filter.inputMaximum" min="0"
+                 (keydown)="checkNumber($event,maxInput.value,column.name)"
+                 (ngModelChange)="onChangeInput(maxInput.value,column.name)">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>

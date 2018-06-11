@@ -1,0 +1,282 @@
+<div class="clearfix"></div>
+<div class="page-title">
+  <div class="title_left">
+    <h3 style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap">
+      <a (click)="goHome()"><i class="fa fa-home"></i> Home Page <i
+        class="fa fa-angle-right"></i></a>
+
+      <small>Group Management</small>
+    </h3>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12 columns">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Detail Group</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div [hidden]="groupDetailData.groupName!=null" class="text-danger"><h4 class="error-message">
+        {{res_error_group_exits}}</h4></div>
+      <div [hidden]="groupDetailData.groupName==null" class="x_content">
+        <div align="center" class="word-wrap"><span style="white-space: pre-wrap">{{groupDetailData.groupName}}</span>
+          <a class="edit-groupname" (click)="showUpdateGroupNameModal()" title="Update group name">
+            <i class="fa fa-pencil"></i>
+          </a>
+        </div>
+        <div>
+          <table>
+            <tr>
+              <td><strong>Creator:</strong></td>
+              <td class="detail-table">{{groupDetailData?.creatorId?.fullname}}</td>
+            </tr>
+            <tr>
+              <td><strong>Created Date:</strong></td>
+              <td class="detail-table">{{groupDetailData?.createDate}}</td>
+            </tr>
+            <tr>
+              <td><strong>Members:</strong></td>
+              <td class="detail-table">{{listAccountData.totalElement}}</td>
+            </tr>
+          </table>
+        </div>
+        <div id="table_acc_of_group" class="man-qs-form-action acc-table">
+          <div class="row">
+            <div class="man-qs-search col-md-8 col-sm-8 col-xs-12">
+              <div class="form-group row">
+                <div class="col-md-5 col-sm-8 col-xs-7">
+                  <input #tableAccKeywordInputSearch type="text" maxlength="50" class="form-control"
+                         (keyup.enter)="submitSearchAccount()"
+                         placeholder="Search by full name">
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-5">
+                  <button (click)="submitSearchAccount(tableAccKeywordInputSearch.value)" type="submit" title="Search"
+                          class="btn btn-primary">Search
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="man-qs-action col-md-4 col-sm-4">
+              <!--Update-->
+              <button type="button" class="btn btn-primary btn-circle" title="Update Group's Members"
+                      (click)="showUpdateAccoutModal()">
+                <i class="fa fa-pencil-square-o icon-width" aria-hidden="true"></i>
+              </button>
+
+              <button type="button" class="btn btn-primary btn-circle" title="Refresh" (click)="resetTableAccOfGroup()">
+                <i class="fa fa-refresh" icon-width></i>
+              </button>
+              <!--Filter-->
+              <button type="button" class="btn btn-circle btn-circle" title="Filter" data-toggle="collapse"
+                      data-target="#collapseExample">
+                <i class="fa fa-filter"></i>
+              </button>
+            </div>
+          </div>
+          <div class="collapse" id="collapseExample">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>From Filter</h2>
+                <div class="clearfix"></div>
+              </div>
+              <!--<div class="x_content">-->
+                <!--<app-filter [columns]="columnTableAccOnGroup"></app-filter>-->
+              <!--</div>-->
+              <div class="x_content">
+                <app-filter [columns]="columnTableAccOnGroup" (changedValueSelectOption)="onChangedValue($event)"></app-filter>
+
+              </div>
+            </div>
+          </div>
+          <app-table-directives [config]="config"
+                                (cellClicked)="onCellClick($event)"
+                                (currentPage)="getCurrentPageTableAccountOnGroup($event)"
+                                (sort)="onSortTableAccountOnGroup($event)"
+                                [rows]="dataTableAccOnGroup" [columns]="columnTableAccOnGroup"></app-table-directives>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--Modal Update Account-->
+  <div bsModal #modalUpdateAccount="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+       aria-labelledby="myLargeModalLabel"
+       aria-hidden="true" [config]="{backdrop: 'static',  keyboard: false}">
+    <div class="modal-dialog modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"><strong>Update Group's Members</strong></h4>
+        </div>
+        <div class="modal-body">
+          <div class="row mainModalUpdateAccount">
+            <label class=""><h4><strong>Group Name: {{groupDetailData.groupName}}</strong></h4></label>
+          </div>
+          <div class="row contentModal">
+            <div class="col-md-8 contentLeftUpdateAccount">
+              <div class="row searchAreaUpdateAccount">
+                <div class="col-md-10 inputAreaUpdateAccount">
+                  <input maxlength="50" #keywordSearch
+                         class="form-control" type="text"
+                         placeholder="Search by full name, username, department, position"
+                         (keyup.enter)="submitSearch(keywordSearch.value)">
+                </div>
+                <div class="col-md-2 btnSearchUpdateAccount">
+                  <button (click)="submitSearch(keywordSearch.value)" type="submit" class="btn btn-primary"
+                          title="Search">Search
+                  </button>
+                </div>
+              </div>
+              <!--code data-->
+              <div class="titleOfResultUpdateAccount row">
+                <div class="col-md-2 divUsernameUpdateAccount">
+                  <strong>Username</strong>
+                </div>
+                <div class="col-md-5 divFullNameUpdateAccount">
+                  <strong>Full Name</strong>
+                </div>
+                <div class="col-md-2 divDepartmentUpdateAccount">
+                  <strong>Department</strong>
+                </div>
+                <div class="col-md-2 divPositionUpdateAccount">
+                  <strong>Position</strong>
+                </div>
+                <div class="col-md-1 checkBoxUpdateAccount">
+                  <i class="fa fa-info-circle"
+                     title="Click on rows of results search to add or remove account in group"></i>
+                </div>
+              </div>
+              <div *ngIf="isNoRecord">
+                <h2 class="noRecordUpdateAccount">No record</h2>
+              </div>
+              <div class="row pre-scrollable dataLeftUpdateAccount" *ngIf="resultsSearch.length !=0">
+                <a class="col-md-12 col-xs-12 col-sm-12 classForHoverResultSearch"
+                   *ngFor="let result of resultsSearch">
+                  <div class="row" (click)="addRemoveAccountToGroup(result)">
+                    <div class="col-md-2 divUsernameUpdateAccount">
+                      {{result.username}}
+                    </div>
+                    <div class="col-md-5 divFullNameUpdateAccount">
+                      {{result.fullname}}
+                    </div>
+                    <div class="col-md-2 divDepartmentUpdateAccount">
+                      {{result.departmentName}}
+                    </div>
+                    <div class="col-md-2 divPositionUpdateAccount">
+                      {{result.positionName}}
+                    </div>
+                    <div class="col-md-1 checkBoxUpdateAccount" *ngIf="result.existInGroup">
+                      <i class="fa fa-check-circle"></i>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <!--/code data-->
+            </div>
+            <div class="col-md-4 contentRightUpdateAccount">
+              <div class="titleContentRightUpdateAccount">
+                <strong>Total Member{{totalMemberOfGroup>1?'s':''}}: </strong>
+                <span>{{totalMemberOfGroup}}</span>
+              </div>
+              <div class="row dataContentRightUpdateAccount">
+                <div class="col-md-7 divListFullNameUpdateAccount">
+                  <strong>Full Name</strong>
+                </div>
+                <div class="col-md-4 divJoinedDateUpdateAccount">
+                  <strong>Joined Date</strong>
+                </div>
+                <div class="col-sm-1 col-xs-1 col-sm-1 divInfoIcon">
+                  <i class="fa fa-info-circle"
+                     title="Hover on rows of list account in group to show remove button"></i>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12 dataRightUpdateAccount pre-scrollable"
+                     *ngIf="listAccountsOfGroup && listAccountsOfGroup.length > 0">
+                  <div class="row classForHoverListAccountGroup classHoverShowIcon"
+                       *ngFor="let account of listAccountsOfGroup">
+                    <div *ngIf="account.existInGroup">
+                      <div class="col-md-7 col-xs-7 col-sm-7 divListFullNameUpdateAccount">
+                        {{account.fullname}}
+                      </div>
+                      <div class="col-md-4 col-xs-4 col-sm-4 divJoinedDateUpdateAccount">
+                        {{account.joinedDate}}
+                      </div>
+                      <a class="col-md-1 col-xs-1 col-sm-1 divIconDelete" (click)="removeAccountFromListGroup(account)">
+                        <i class="fa fa-times-circle"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer modalFooterUpdateAccount row">
+            <button class="btn btn-primary btnSubmitUpdateAccount" [disabled]="checkChangesToDisableSubmit()"
+                    (click)="submitInsertOrRemove()" title="Submit">
+              Submit
+            </button>
+            <button class="btn  btn-danger btnCancelUpdateAccount" (click)="onCancel()" title="Cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal update GroupName -->
+  <div bsModal #modalUpdateGroupName="bs-modal" class="modal fade " tabindex="-1" role="dialog"
+       aria-labelledby="myLargeModalLabel"
+       aria-hidden="true" [config]="{backdrop: 'static',  keyboard: false}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title text-center">Update Group Name</h4>
+        </div>
+        <div class="modal-body">
+          <form #formUpdateGroupName="ngForm">
+            <div class="form-group row" hidden="hidden">
+              <label class="col-sm-2 control-label groupName">Id</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control groupName" name="groupId" [(ngModel)]="groupUpdate.groupId">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-xs-3 control-label">Group name:</label>
+              <div class="col-sm-9 col-xs-9">
+                <input type="text" class="form-control" id="groupName" name="groupName" #inputGroupName
+                       required
+                       maxlength="50"
+                       [ngModel]="groupUpdate.groupName" #groupName="ngModel" (focus)="eventForcusInputGroupName()">
+                <p class="show-errors">
+                  <small class="text-danger"
+                         *ngIf="groupName.invalid && (formUpdateGroupName.submited || groupName.dirty)">
+                    <!-- <span *ngIf="groupName.errors.required">{{groupName_require}}</span> -->
+                    <span *ngIf="groupName.errors.maxlength">{{groupName_maxlength}}</span>
+                    <!-- <span *ngIf="groupName.errors.pattern">{{groupName_regex}}</span> -->
+                  </small>
+                  <small class="text-danger" *ngIf="res_error != null">
+                    {{res_error}}
+                  </small>
+                </p>
+              </div>
+            </div>
+            <div class="form-group row action">
+              <div class="col-sm-9 col-xs-9 col-sm-offset-3 col-xs-offset-3">
+                <p class="text-right action">
+                  <button type="submit" class="btn btn-primary"
+                          [disabled]="formUpdateGroupName.invalid || checkValueFormUpdateGroupName(groupName.value)"
+                          (click)="onSubmitFormUpdateGroupName(groupName.value.trim())">Save
+                  </button>
+                  <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

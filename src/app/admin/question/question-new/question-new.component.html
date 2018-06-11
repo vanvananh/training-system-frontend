@@ -1,0 +1,186 @@
+<div class="clearfix"></div>
+<div class="page-title">
+  <div class="title_left">
+    <h3 style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap">
+      <a>
+        <i class="fa fa-home"></i> Home Page
+        <i class="fa fa-angle-right"></i>
+      </a>
+      <small>Question Management
+        <i class="fa fa-angle-right"></i>
+      </small>
+      <small>New question</small>
+    </h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-md-12 col-xs-12 columns">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Create Question</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="form-create col-sm-10 col-xs-10 col-sm-offset-1 col-xs-offset-1">
+          <form class="form-create-question" [formGroup]="formCreateQuestion" (ngSubmit)="onSubmitFormCreateQuestion(formCreateQuestion)"
+            enctype="multipart/form-data">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group required">
+                  <label class="control-label">Category</label>
+                  <ss-multiselect-dropdown 
+                    [ngModelOptions]="{standalone: true}" 
+                    [options]="categories" 
+                    [texts]="texts" 
+                    [settings]="settingsCategory"
+                    [(ngModel)]="question.categoryId"
+                    (ngModelChange)="onChangeQuestionCategory($event)" >
+                  </ss-multiselect-dropdown>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="questionType" class="control-label">Question type</label>
+                  <ss-multiselect-dropdown 
+                    [ngModelOptions]="{standalone: true}" 
+                    [options]="types" 
+                    [texts]="texts" 
+                    [settings]="settingsTypeLevel"
+                    [(ngModel)]="question.typeId" 
+                    (ngModelChange)="onChangeQuestionType($event)" 
+                    >
+                  </ss-multiselect-dropdown>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group required">
+                  <label for="level" class="control-label">Level</label>
+                  <ss-multiselect-dropdown 
+                    [ngModelOptions]="{standalone: true}"  
+                    [options]="levels" [texts]="texts" 
+                    [settings]="settingsTypeLevel"
+                    [(ngModel)]="question.levelId" 
+                    (ngModelChange)="onChangeQuestionLevel($event)" >
+                  </ss-multiselect-dropdown>
+                </div>
+              </div>
+            </div>
+            <div class="form-group required">
+              <label for="content" class="control-label">Content
+                <span>
+                  <i>(Max: 1500 characters)</i>
+                </span>
+              </label>
+              <textarea class="form-control" rows="5" formControlName="content" [(ngModel)]="question.content" maxlength="1500"></textarea>
+            </div>
+            <div class="image">
+              <div class="btn btn-default btn-file btn-secondary">
+                <i class="fa fa-image" aria-hidden="true"></i>
+                <input type="file" formControlName="linkImage" 
+                  #fileContent class="image" 
+                  accept="image/gif, image/jpeg, image/png" 
+                  (change)="onFileImageChange($event)"
+                  pattern="/image-*/"> Choose image
+                <p class="show-errors">
+                  <small class="text-danger" *ngIf="fileContent.invalid && (formCreateQuestion.submited || fileContent.dirty)">
+                    <span *ngIf="fileContent.errors.pattern">{{error_isImage}}</span>
+                  </small>
+                </p>
+              </div>
+              <div class="preview-image" *ngIf="url_image !=null">
+                <img [src]="url_image" >
+              </div>
+              <p class="note-image" *ngIf="url_image ==null"><strong><i>({{this.image_note}})</i></strong></p>
+            </div>
+            <p class="show-errors">
+              <small class="text-danger" *ngIf="error_sizeImage != null">
+                {{error_sizeImage}}
+              </small>
+            </p>
+            <hr>
+            <div formArrayName="answers">
+              <p class="show-errors">
+                <small class="text-danger" *ngIf="answer_error != null">
+                  {{answer_error}}
+                </small>
+              </p>
+              <div *ngIf="question.typeId[0] == 1">
+                <div *ngFor="let answer of formCreateQuestion.controls.answers.controls; let i=index">
+                  <div class="form-group suggestion" [formGroupName]="i">
+                    <div *ngIf="displaySuggestion == true">
+                      <label for="content" class="control-label" (click)="isDisplaySuggestion()">Suggestion
+                        <i class="fa fa-angle-up"></i>
+                      </label>
+                    </div>
+                    <div *ngIf="displaySuggestion == false">
+                      <label for="content" class="control-label" (click)="isDisplaySuggestion()">Suggestion
+                        <span>
+                          <i>(Max: 500 characters)</i>
+                        </span>
+                        <i class="fa fa-angle-down"></i>
+                      </label>
+                      <textarea class="form-control" rows="5" formControlName="content" maxlength="500"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="list-answer" *ngIf="question.typeId[0] == 2">
+                <div class="form-group required">
+                  <label for="content" class="control-label">Answer</label>
+                  <div class="answers" #listAnswer>
+                    <div *ngFor="let answer of formCreateQuestion.controls.answers.controls; let i=index" class="answer">
+                      <div [formGroupName]="i" class="border-answer">
+                        <div class="check" title="Check this answer is correct">
+                          <input type="checkbox" value="1" formControlName="isCorrect">
+                          <label for=""></label>
+                        </div>
+                        <div class="group-action">
+                          <div class="input">
+                            <input class="form-control" formControlName="content" required maxlength="500">
+                          </div>
+                          <div class="del" title="Remove">
+                            <button type="button" class="btn btn-danger" 
+                            *ngIf="formCreateQuestion.controls.answers.controls.length > 2" 
+                            (click)="removeAnswer(i)"><i class="fa fa-times" ></i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="add" *ngIf="formCreateQuestion.controls.answers.controls.length < 5">
+                  <p class="text-left">
+                    <a (click)="addComponentAnswer()" class="btn btn-success" title="Add">
+                      <i class="fa fa-plus"></i>
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <p class="text-right action-button">
+                <button type="submit" class="btn btn-primary" [disabled]="isDisableForm()">
+                  Save
+                </button>
+                <button type="button" class="btn btn-danger" (click)="resetFormCreateGroup()">Reset</button>
+              </p>
+            </div>
+            <!-- <div class="margin-20 row">
+              <div class="col-sm-6">
+                <div>Form</div>
+                <pre>Is myForm valid?: <br>{{formCreateQuestion.valid | json}}</pre>
+                <pre>form value: <br>{{formCreateQuestion.value | json}}</pre>
+              </div>
+              <div class="col-sm-6">
+                <div>Question</div>
+                <pre>Is myForm valid?: <br>{{question.valid | json}}</pre>
+                <pre>form value: <br>{{question | json}}</pre>
+              </div>
+            </div> -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

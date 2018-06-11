@@ -1,0 +1,92 @@
+<div class="clearfix"></div>
+<div class="page-title">
+  <div class="title_left">
+    <h3 style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap">
+      <a (click)="goHome()">
+        <i class="fa fa-home"></i> Home Page
+        <i class="fa fa-angle-right"></i>
+      </a>
+      <a>
+        <small (click) = "goBack()">Exam Management
+          <i class="fa fa-angle-right"></i>
+        </small>
+      </a>
+      <small>Create Exam</small>
+    </h3>
+  </div>
+</div>
+
+<div class="row fix-create-exam" >
+  <div class="col-md-12 col-md-12 col-xs-12 columns">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Create Exam</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="form-create col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">
+          <form #formCreateExam="ngForm" class="form-create-exam" (ngSubmit)="onSubmitFormCreateExam(formCreateExam.value)">
+            <div class="row">
+              <div>
+                <div class="form-group required">
+                  <label for="title" class=" control-label">Title</label>
+                  <input class="form-control" id="title" name="title" placeholder="Title of Exam" type="text" [(ngModel)]="exam.title" 
+                  maxlength="200" #title="ngModel" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form-group required">
+                  <label class="control-label">Category</label>
+                  <ss-multiselect-dropdown 
+                    [ngModelOptions]="{standalone: true}" 
+                    [options]="categories" 
+                    [texts]="texts" 
+                    [settings]="settingsCategory"
+                    [(ngModel)]="exam.categoryId"
+                    (ngModelChange)="onChangeCategory($event)">
+                  </ss-multiselect-dropdown>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form-group required">
+                  <label class="control-label">Duration (Minute)</label>
+                  <ss-multiselect-dropdown 
+                    [ngModelOptions]="{standalone: true}" 
+                    [options]="durations" 
+                    [texts]="texts" 
+                    [settings]="settingsDuration"
+                    [(ngModel)]="exam.durationId"
+                    (ngModelChange)="onChangeDuration($event)">
+                  </ss-multiselect-dropdown>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div >
+                <div class="form-group">
+                  <label for="note" class="control-label">Note</label>
+                  <textarea class="form-control" rows="4" name="note" id="note" [(ngModel)]="exam.note" maxlength="500" #note ="ngModel"></textarea>
+                </div>
+              </div>
+            </div>
+            <br/>
+            <p class="show-errors">
+              <small class="text-danger" >
+              {{res_error}}
+            </small></p>
+            <div class="form-group row action text-right">
+              <p class="text-right action" id="btn-control">
+                <button type="submit" class="btn btn-primary custom-button-width .navbar-left" [disabled]="checkDisableSubmit()">Submit</button>
+                <button type="button" class="btn btn-danger custom-button-width .navbar-left"(click)="resetFormCreateExam()">Reset</button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

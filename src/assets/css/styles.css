@@ -1,0 +1,97 @@
+.man-breadcrumbs li i.fa-home {
+  padding-right: 5px;
+}
+
+.man-breadcrumbs ul {
+  display: flex;
+  list-style: none;
+  padding-left: 1px;
+}
+
+.man-breadcrumbs ul li {
+  padding-right: 10px;
+}
+
+div.content {
+  margin-left: 50px;
+  padding: 10px;
+  padding: 10px;
+}
+
+/*div.man-qs-form-action div.man-qs-search input,*/
+/*div.man-qs-form-action div.man-qs-search button {*/
+/*border-radius: 50px;*/
+/*}*/
+
+div.man-qs-form-action ul.list-action {
+  list-style: none;
+  display: -webkit-inline-box;
+  float: right;
+}
+
+div.man-qs-form-action ul.list-action li {
+  margin-right: 20px;
+}
+
+div.man-qs-form-action ul.list-action a {
+  padding: 5px;
+  color: #2e353d;
+}
+
+div.man-qs-form-action ul.list-action a:hover {
+  color: #4f5b69;
+}
+
+div.man-qs-form-action ul.list-action i {
+  font-size: 30px;
+}
+
+div.man-qs-action button {
+  margin-right: 1px;
+  margin-left: 4px;
+}
+
+div.man-qs-filter div.datetimepicker {
+  display: flex;
+}
+
+div.man-qs-filter div.datetimepicker > span {
+  padding-top: 10px;
+  padding-left: 4px;
+}
+
+div.man-qs-action button {
+  float: right;
+}
+.x_title {
+  padding-left: unset;
+}
+
+.x_content {
+  padding: unset;
+}
+
+.btn {
+  margin-bottom: 0px;
+  margin-right: 0px;
+}
+
+.btnSearch {
+  padding-left: 0px;
+}
+
+.iconOption {
+  margin-left: 7px;
+  margin-bottom: 9px;
+  padding-left: 0px;
+}
+
+div.man-qs-action.col-md-4 {
+  margin-left: 0px;
+  padding-left: 7px;
+  margin-bottom: 12px;
+}
+/*.form-group {
+  margin-bottom: 5px!important;
+}*/
+

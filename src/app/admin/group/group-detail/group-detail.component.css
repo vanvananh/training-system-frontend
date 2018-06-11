@@ -1,0 +1,318 @@
+.man-breadcrumbs li i.fa-home {
+  padding-right: 5px;
+}
+
+.word-wrap {
+  word-wrap: break-word;
+  font-size: 36px;
+}
+
+.btnSearchAccOfGroup {
+  padding-left: 0px;
+}
+
+.icon-width {
+  width: 12px;
+}
+
+.detail-table {
+  padding-left: 50px;
+}
+
+.acc-table {
+  padding-top: 10px;
+}
+
+.man-breadcrumbs ul {
+  display: flex;
+  list-style: none;
+  padding-left: 1px;
+}
+
+.man-breadcrumbs ul li {
+  padding-right: 10px;
+}
+
+div.content {
+  margin-left: 50px;
+  padding: 10px;
+  padding: 10px;
+}
+
+div.man-qs-action button {
+  margin-right: 1px;
+  margin-left: 4px;
+}
+
+div.man-qs-form-action div.man-qs-search input,
+div.man-qs-form-action div.man-qs-search button {
+  /*border-radius: 50px;*/
+}
+
+div.man-qs-form-action ul.list-action {
+  list-style: none;
+  display: -webkit-inline-box;
+  float: right;
+}
+
+div.man-qs-form-action ul.list-action li {
+  margin-right: 20px;
+}
+
+div.man-qs-form-action ul.list-action a {
+  padding: 5px;
+  color: #2e353d;
+}
+
+div.man-qs-form-action ul.list-action a:hover {
+  color: #4f5b69;
+}
+
+div.man-qs-form-action ul.list-action i {
+  font-size: 30px;
+}
+
+div.man-qs-filter div.datetimepicker {
+  display: flex;
+}
+
+div.man-qs-filter div.datetimepicker > span {
+  padding-top: 10px;
+  padding-left: 4px;
+}
+
+div.man-qs-action button {
+  float: right;
+}
+
+.x_title {
+  padding-left: unset;
+  margin-bottom: 0px;
+}
+
+.x_content {
+  padding: unset;
+}
+
+/*Anh Ngoc*/
+.mainModalUpdateAccount {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.contentModalUpdateAccount {
+  height: 403px;
+}
+
+.contentLeftUpdateAccount {
+  background-color: #ffffff;
+  height: 407.33px;
+  border: 1px solid #eff0f2;
+}
+
+.searchAreaUpdateAccount {
+  padding-top: 11px;
+  width: 590px;
+}
+
+.dataLeftUpdateAccount {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 331px;
+}
+
+.contentRightUpdateAccount {
+  background-color: #f6f7f9;
+  height: 407.33px;
+}
+
+.dataRightUpdateAccount {
+  height: 331px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.modalFooterUpdateAccount {
+  margin-top: 5px;
+}
+
+.btnSubmitUpdateAccount {
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+
+.btnCancelUpdateAccount {
+  margin-top: 10px;
+}
+
+.divUsernameUpdateAccount {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 95.53px;
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: break-all;
+  text-overflow: ellipsis;
+}
+
+.divFullNameUpdateAccount {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 236.83px;
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: break-all;
+  text-overflow: ellipsis;
+}
+
+.divDepartmentUpdateAccount {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 95.53px;
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: break-all;
+  text-overflow: ellipsis;
+}
+
+.divPositionUpdateAccount {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 95.53px;
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: break-all;
+  text-overflow: ellipsis;
+}
+
+.checkBoxUpdateAccount {
+  width: 47.76px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.titleOfResultUpdateAccount {
+  width: 590px;
+  border-bottom: 1px solid #eff0f2;
+}
+
+.titleContentRightUpdateAccount {
+  padding-top: 19px;
+  padding-bottom: 8.5px;
+}
+
+.dataContentRightUpdateAccount {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.divListFullNameUpdateAccount {
+  padding-bottom: 5px;
+  padding-top: 5px;
+  max-width: 162.85px;
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: break-all;
+  text-overflow: ellipsis;
+}
+
+.divJoinedDateUpdateAccount {
+  width: 98.66px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.divIconDelete {
+  display: none;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 17px;
+}
+
+.divInfoIcon {
+  padding-bottom: 5px;
+  padding-top: 5px;
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 17px;
+}
+
+.btnSearchUpdateAccount {
+  width: 91px;
+}
+
+.noRecordUpdateAccount {
+  color: red;
+}
+
+.inputAreaUpdateAccount {
+  padding-right: 0px;
+  width: 499px;
+}
+
+.classForHoverResultSearch:hover {
+  background: rgba(38, 185, 154, 0.07);
+}
+
+.classHoverShowIcon:hover .divIconDelete {
+  display: block;
+}
+
+.classForHoverListAccountGroup:hover {
+  background: rgba(38, 185, 154, 0.07);
+}
+
+/*end ngoc*/
+
+.btn {
+  margin-bottom: 0px;
+}
+
+label.control-label {
+  text-align: center;
+  margin-top: 7px;
+  font-size: 14px;
+}
+
+div.modal-body p button {
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 10px;
+}
+
+a.edit-groupname i {
+  font-size: 20px;
+  margin-left: 10px;
+  color: #1073a5;
+  cursor: pointer;
+}
+
+label.control-label, .groupName {
+  text-align: right;
+  margin-top: 7px;
+  font-size: 14px;
+}
+
+input#groupName, p.action {
+  width: 90% !important;
+}
+
+div.modal-body p button {
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 10px;
+  width: 70px;
+}
+
+div.modal form div.action p.action,
+div.modal form div.form-group,
+div.modal form div.action .col-sm-9 {
+  margin-bottom: 0px;
+}
+
+p.show-errors {
+  height: 20px;
+  margin-bottom: 0px;
+}
+

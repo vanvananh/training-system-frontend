@@ -1,0 +1,90 @@
+<div class="row table-responsive" style="margin:0px 0.1px 0px 0.1px">
+  <!--table-->
+  <table class="table" ngClass="{{config.className || ''}}"
+         role="grid" style="width: 100%;">
+    <!--table th-->
+    <thead>
+    <tr role="row" class="something">
+      <th hidden="{{config.isHiddenCheckBox}}">
+        <input type="checkbox" [checked]="checked" (change)="checkBoxChangeAll($event,rows)" id="check-all"
+               class="flat">
+      </th>
+      <th *ngFor="let column of columns" ngClass="{{column.sizeColumnTable||''}}"
+          (click)="sortClick(column.name,column.sort.sortType)" style.max-width="{{column.maxWidth+'px'}}">
+        {{column.title}}
+        <i *ngIf="column.sort" class="fa"
+           [ngClass]="{'fa-sort':column.sort.isSort == true,'fa-sort-down': column.sort.sortType === 'asc', 'fa-sort-up': column.sort.sortType === 'desc'}"></i>
+      </th>
+    </tr>
+    </thead>
+    <!--table tr-->
+    <tbody>
+    <tr *ngFor="let row of rows" class="something">
+      <td hidden="{{config.isHiddenCheckBox}}">
+        <input type="checkbox" [disabled]="row.statusId&&row.statusId==1" [checked]="row.isCheck"
+               (change)="checkBoxChange($event,row)" class="flat"
+               name="table_records" title="{{row.statusId&&row.statusId==1?'Public status cannot be deleted':''}}">
+      </td>
+      <td ngClass="{{column.sizeColumnTable||''}}" style.max-width="{{column.maxWidth+'px'}}"
+          *ngFor="let column of columns ">
+        <a *ngIf="column.name==columns[0].name&&config.isDetail" [innerHtml]="(htmlEscape(getData(row, column.name)))"
+           (click)="cellClick(row, column.name)" style="white-space: pre"></a>
+        <div *ngIf="column.name==columns[0].name&&!config.isDetail" [innerHtml]="sanitize(getData(row, column.name))"
+             (click)="cellClick(row, column.name)" style="white-space: pre"></div>
+        <div *ngIf="column.name!=columns[0].name" [innerHtml]="sanitize(getData(row, column.name))"
+             style="white-space: pre"></div>
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+</div>
+<div *ngIf="rows&&rows.length == 0" style="padding: 10px;white-space: nowrap;text-align: center;font-size: 20px">No
+  record
+</div>
+<!--paging-->
+<div class="row rowpaging">
+  <div class="col-md-5 col-sm-6 col-xs-12 columnspaging">
+    <ul class="pagination">
+      <!--first page-->
+      <li>
+        <a title="First page" class="btn" [attr.disabled]="config.currentPage<=1?true:null"
+           (click)="preOrNextPageClick('first',config.currentPage>1?true:null)">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <!--pre-->
+      <li>
+        <a title="Previous" class="btn" [attr.disabled]="config.currentPage<=1?true:null"
+           (click)="preOrNextPageClick('pre',config.currentPage>1?true:null)">
+          <span aria-hidden="true">&lsaquo;</span>
+        </a>
+      </li>
+      <!--current page-->
+      <li><a class="btn" style="cursor: default">{{config.currentPage}}</a>
+      </li>
+      <!--next-->
+      <li>
+        <a title="Next" class="btn"
+           [attr.disabled]="config.currentPage>=config.totalPage?true:null"
+           (click)="preOrNextPageClick('next',config.currentPage<config.totalPage?true:null)">
+          <span aria-hidden="true">&rsaquo;</span>
+        </a>
+      </li>
+      <!--last page-->
+      <li>
+        <a title="Last page" class="btn" [attr.disabled]="config.currentPage>=config.totalPage?true:null"
+           (click)="preOrNextPageClick('last',config.currentPage<config.totalPage?true:null)">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!--show records and page-->
+  <div class="col-md-7 col-sm-6 show">
+    {{config.numberRecordOnPage}}
+    record{{config.numberRecordOnPage>1?'s':''}}
+    {{config.currentPage}} of
+    {{config.totalPage}} page{{config.totalPage>1?'s':''}}
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="clearfix"></div>
+<div class="page-title">
+  <div class="title_left">
+    <h3 style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap">
+      <a (click)="goHome()"><i class="fa fa-home"></i> Home Page <i class="fa fa-angle-right"></i></a>
+      <small>Exam Management</small>
+    </h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 col-md-12 col-xs-12 columns">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>List Exams</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="man-qs-form-action">
+          <div class="row">
+
+            <div class="man-qs-search col-md-8 col-sm-8 col-xs-12">
+              <div class="form-exam row">
+                <div class="col-md-5 col-sm-8 col-xs-7">
+                  <input maxlength="50" type="text" #keywordSearch (keyup.enter)="submitSearch()" class="form-control"
+                         maxlength="50"
+                         placeholder="Search by exam title">
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-5 btnSearch">
+                  <button (click)="submitSearch()" type="submit" class="btn btn-primary" title="Search">Search</button>
+                </div>
+              </div>
+            </div>
+            <div class="man-qs-action col-md-4 col-sm-4">
+              <!--Delete-->
+              <button class="btn btn-danger" title="Delete Exam"
+                      [disabled]="this.tableDirectivesComponent.dataCheckBox.length == 0 ? true : false"
+                      (click)="showDeleteExamModal()">
+                <i class="fa fa-trash"></i>
+              </button>
+              <!--Update-->
+              <!--<button type="button" class="btn btn-primary btn-circle" title="Update exam!">-->
+              <!--<i class="fa fa-pencil-square-o" aria-hidden="true"></i>-->
+              <!--</button>-->
+              <!--create-->
+              <button type="button" class="btn btn-success btn-circle" title="Create Exam" (click)="clickCreate()"><i
+                class="fa fa-plus"></i>
+              </button>
+              <!--refresh-->
+              <button type="button" class="btn btn-primary btn-circle refresh" title="Refresh"
+                      (click)="resetExamTable()">
+                <i class="fa fa-refresh"></i>
+              </button>
+              <!--Filter-->
+              <button type="button" class="btn btn-circle btn-circle" title="Filter" data-toggle="collapse"
+                      data-target="#collapseExample">
+                <i class="fa fa-filter"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="{{classNameFilter}}" id="collapseExample" #collapse>
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>Filters</h2>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <app-filter [columns]="ExamColumns" (changedValueSelectOption)="onChangedValue($event)"></app-filter>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <app-table-directives [config]="ConfigTable"
+                              (checkBoxChanged)="onCheckBoxSelected($event)"
+                              (onCheckBoxChangedAll)=" onCheckBoxSelectedAll($event)"
+                              (currentPage)="getCurrentPage($event)"
+                              (sort)="onSortTableExam($event)"
+                              [rows]="ExamRows" [columns]="ExamColumns">
+        </app-table-directives>
+      </div>
+    </div>
+  </div>
+</div>
+<!--popup delete exam question-->
+<div bsModal #modalDeleteExam="bs-modal" class="modal fade modal-delete-group" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-center" style="text-align: center"
+        >Are you sure want to delete {{this.tableDirectivesComponent.dataCheckBox.length > 1 ?
+          this.tableDirectivesComponent.dataCheckBox.length + ' exams' :
+          this.tableDirectivesComponent.dataCheckBox.length + ' exam' }}?</h4>
+      </div>
+      <div class="modal-footer">
+        <div class="text-right buttonExamPopup">
+          <button class="btn btn-primary btnYesPopup" (click)="onDeleteExam()">Yes</button>
+          <button class="btn btn-danger btnNoPopup" (click)="onCancelModal('delete')">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

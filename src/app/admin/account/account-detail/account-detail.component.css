@@ -1,0 +1,32 @@
+.table-responsive panel{
+  margin: 100px;
+  }
+.man-breadcrumbs li i.fa-home {
+    padding-right: 5px;
+  }
+
+  .man-breadcrumbs ul {
+    display: flex;
+    list-style: none;
+    padding-left: 1px;
+  }
+
+  .man-breadcrumbs ul li {
+    padding-right: 10px;
+  }
+
+  .table > tbody > tr > td {
+    vertical-align: text-top;
+}
+ .error-message{
+  margin-left: 4px;
+}
+.x_title {
+  padding-left: unset;
+}
+.x_content {
+  padding: unset;
+}
+.btn {
+  margin-right: 9px;
+}

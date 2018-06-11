@@ -1,0 +1,49 @@
+/* create group form */
+
+label.control-label, .groupName {
+  text-align: right;
+  margin-top: 7px;
+  font-size: 14px;
+}
+
+input#categoryName, p.action {
+  width: 94% !important;
+}
+
+div.modal-body p button {
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 10px;
+  width: 70px;
+}
+
+div.modal form div.action p.action,
+div.modal form div.form-group,
+div.modal form div.action .col-sm-9 {
+  margin-bottom: 0px;
+}
+
+p.show-errors {
+  height: 20px;
+  margin-bottom: 0px;
+}
+
+.btnYesPopup {
+  width: 65px;
+  margin-right: 6px;
+}
+
+.btnNoPopup {
+  width: 65px;
+}
+@media screen and (max-width: 200px) {
+  .btnYesPopup{
+    width: 70px;
+    margin: 0 auto;
+  }
+  .btnNoPopup{
+    width: 70px;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+}

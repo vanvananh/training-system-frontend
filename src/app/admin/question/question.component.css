@@ -1,0 +1,37 @@
+.form-group > label {
+  padding-left: 0px;
+  padding-right: 0px;
+  text-align: left;
+}
+
+.navbar-right .dropdown-menu {
+  left: 0;
+}
+.btnYesPopup {
+  width: 65px;
+  margin-right: 6px;
+}
+
+.btnNoPopup {
+  width: 65px;
+}
+
+.man-qs-action button.create {
+  background-color: #41942b;
+}
+
+.man-qs-action button.create i {
+  color: white;
+}
+
+@media screen and (max-width: 200px) {
+  .btnYesPopup{
+    width: 70px;
+    margin: 0 auto;
+  }
+  .btnNoPopup{
+    width: 70px;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+}

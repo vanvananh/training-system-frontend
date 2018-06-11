@@ -1,0 +1,56 @@
+<div class="container body">
+  <div class="main_container">
+    <div class="col-md-3 left_col">
+      <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+          <a routerLink="/tranning-system/home/index" class="site_title"><img
+            style="position: relative;
+            top: -3px;
+            margin-right: 5px;margin-left:5px;font-size: 20px"
+            width="45" src="../../assets/images/logo-cmc.png" alt=""> <span>Tranning System</span></a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- menu profile quick info -->
+        <div class="profile clearfix">
+          <div class="profile_pic">
+            <img [src]="BaserFoder+User.avatar" alt="..." class="img-circle profile_img">
+          </div>
+          <div class="profile_info">
+            <span>Welcome,</span>
+            <h2>{{User.fullName}}</h2>
+          </div>
+        </div>
+        <!-- /menu profile quick info -->
+
+        <br/>
+
+        <!-- sidebar menu -->
+        <app-sidebar-menu></app-sidebar-menu>
+        <!-- /sidebar menu -->
+
+      </div>
+    </div>
+
+    <!-- top navigation -->
+    <app-top-menu></app-top-menu>
+    <!-- /top navigation -->
+
+    <!-- page content -->
+    <div class="right_col" role="main">
+      <div class="row" style="padding: 30px">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+    <!-- footer content -->
+    <footer>
+      <div style="text-align: center">
+        Powered by &copy; CMCGlobal 2017
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+  </div>
+</div>

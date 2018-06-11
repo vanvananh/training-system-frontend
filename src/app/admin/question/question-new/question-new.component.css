@@ -1,0 +1,196 @@
+/* ----------- answer ----------------*/
+div.answer,
+div.group-action,
+div.border-answer{
+    display: flex;
+}
+
+div.border-answer {
+    width: 100%;
+}
+
+div.answer {
+    margin-bottom: 10px;
+}
+
+div.group-action {
+    width: calc(100% - 30px);
+}
+
+div.check,
+div.add {
+    position: relative;
+    width: 30px;
+}
+
+div.del {
+    cursor: pointer;
+    position: relative;
+    width: 40px;
+}
+
+div.add {
+    margin-top: 20px;
+    height: 30px;
+}
+
+div.add p {
+    margin-bottom: 0px;
+}
+
+div.check input {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+div.group-action div.input {
+    width: calc(100% - 30px);
+}
+
+div.del button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 2px 7px;
+}
+
+div.add i {
+    color: white;
+}
+
+div.answer div.input input {
+    border: 0px;
+    box-shadow: none;
+    border-bottom: 1px solid #333333;
+}
+
+div.image {
+    margin-bottom: 0px;
+    margin-left: 0;
+    margin-right: 0;
+    display: flex;
+}
+
+div.btn-file {
+    position: relative;
+    cursor: pointer;
+    height: 35px;
+}
+
+div.btn-file > input[type='file'] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: inherit;
+    text-align: right;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+
+div.preview-image {
+    height: 100px;
+    margin-left: 20px;
+}
+
+div.preview-image img {
+    height: 100%;
+}
+
+.required .control-label:after {
+    content:"*";color:red;
+    margin-left: 5px;
+}
+
+textarea {
+    resize: none;
+}
+
+div.suggestion textarea {
+    font-size: 13px;
+    font-style: italic;
+    word-spacing: 2px;
+    letter-spacing: 0.8px;
+}
+
+div.list-answer label {
+    margin-bottom: 0px;
+}
+
+div.list-answer input[type='text'] {
+    padding: 0px 12px 2px 12px;
+    height: 30px;
+}
+
+.action-button button{
+    margin-left: 10px;
+    width: 80px;
+}
+
+p.note-image {
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+@media screen and (min-width: 770px) {
+    .field-input .form-group {
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .form-create {
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    .form-create-question > div.row,
+    .form-create-question > div.row > div.col-sm-3,
+    .form-create-question > div.row > div.col-sm-6
+    {
+        width: 100%;
+    }
+
+    .row,
+    .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, 
+    .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+        margin-right: 0px;
+        margin-left: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .field-combobox,
+    .field-input {
+        width: inherit;
+    }
+
+    .form-group {
+        display: grid;
+    }
+}
+
+@media screen and (max-width: 510px) {
+    div.right_col > div.row {
+        padding: 0px;
+    }
+    div.image {
+        display: block;
+    }
+
+    p.note-image {
+        padding-left: 0px;
+    }
+
+    div.preview-image {
+        margin-left: 0px;
+        margin-top: 10px;
+    }
+}
+
